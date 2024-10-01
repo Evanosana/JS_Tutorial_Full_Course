@@ -7,6 +7,11 @@ let currentlySelected = document.getElementById("currentlySelected");
 let computer = (Math.random());
 let computerMove = '';
 let myMove = '';
+let score = {
+    wins: 0,
+    losses: 0,
+    ties: 0
+};
 computerOutcome();
 
 function computerOutcome(){
@@ -41,13 +46,6 @@ play.addEventListener("click", () => {
     if(myMove === ''){
         return;
     }
-    if(myMove === 'rock'){
-        playGame('rock');
-    } else if(myMove === 'paper'){
-        playGame('paper');
-    } else{
-        playGame('scissors');
-    }
     if(computerMove === 'rock'){
         if(myMove === 'rock'){
             result = 'Tie';
@@ -58,7 +56,7 @@ play.addEventListener("click", () => {
         }
     } else if(computerMove === 'paper'){
         if(myMove === 'rock'){
-            result = 'You won';
+            result = 'You lost';
         } else if(myMove === 'paper'){
             result = 'Tie';
         } else{
@@ -68,13 +66,20 @@ play.addEventListener("click", () => {
         if(myMove === 'rock'){
             result = 'You won';
         } else if(myMove === 'paper'){
-            result = 'You won';
+            result = 'You lost';
         } else{
             result = 'Tie';
         }
+    } 
+    if(result === 'You won'){
+        score.wins += 1;
+    } else if(result === 'You lost'){
+        score.losses += 1;
+    } else{
+        score.ties +=1;
     }
 
-    alert(`${result}, you chose ${myMove}, computer chose ${computerMove}`)
+    alert(`${result}, you chose ${myMove}, computer chose ${computerMove}\nWins = ${score.wins}  |  Losses = ${score.losses}  |  Ties = ${score.ties}`)
     currentlySelected.innerText = 'none currently selected';
     computer = (Math.random());
     computerOutcome();
