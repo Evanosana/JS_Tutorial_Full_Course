@@ -7,11 +7,23 @@ let currentlySelected = document.getElementById("currentlySelected");
 let computer = (Math.random());
 let computerMove = '';
 let myMove = '';
-let score = {
-    wins: 0,
-    losses: 0,
-    ties: 0
-};
+let score
+console.log(localStorage.length)
+if(localStorage.length === 0){
+    console.log('yes')
+    score = {
+        wins: 0,
+        losses: 0,
+        ties: 0
+    };
+    localStorage.setItem('score', JSON.stringify(score))
+    // console.log('setScore')
+} else{
+    score = JSON.parse(localStorage.getItem('score'))
+    console.log(JSON.parse(localStorage.getItem('score')))
+    console.log('yes')
+}
+
 computerOutcome();
 
 function computerOutcome(){
@@ -84,6 +96,7 @@ play.addEventListener("click", () => {
     computer = (Math.random());
     computerOutcome();
     myMove = '';
+    localStorage.setItem('score', JSON.stringify(score))
 })
 
 
